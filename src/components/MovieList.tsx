@@ -5,7 +5,6 @@ import { useQuery } from "react-query";
 
 import { getMovieList } from "../api/movie";
 import MovieItem from "./MovieItem";
-import { YTS } from "../interfaces/api/movie";
 
 const title__container = css`
   display: flex;
