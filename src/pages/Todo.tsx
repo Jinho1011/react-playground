@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React, { useState, useEffect } from "react";
 import { css } from "@emotion/react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch, shallowEqual } from "react-redux";
 
 import {
   createTodo,
@@ -25,7 +25,10 @@ const divider = css`
 `;
 
 function Todo() {
-  const todos = useSelector((state: IRootReducer) => state.todos.data);
+  const todos = useSelector(
+    (state: IRootReducer) => state.todos.data,
+    shallowEqual
+  );
   const dispatch = useDispatch();
 
   const _createTodo = (todo: string) => {
@@ -64,16 +67,15 @@ function Todo() {
         {todos.length === 0 ? <></> : <div css={divider} />}
         {todos.map((todo, index) => {
           return (
-            <>
+            <div key={todo.id}>
               <TodoItem
                 todo={todo}
                 checkTodo={_checkTodo}
                 modifyTodo={_modiftTodo}
                 deleteTodo={_deleteTodo}
-                key={todo.id}
               />
               {index === todos.length - 1 ? <></> : <div css={divider} />}
-            </>
+            </div>
           );
         })}
       </div>
