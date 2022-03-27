@@ -14,10 +14,10 @@ function Todo() {
   const dispatch = useDispatch();
 
   return (
-    <div>
-      {/* {todos.map((todo) => {
+    <div className="container">
+      {todos.map((todo) => {
         return <div key={todo.id}>{todo.todo}</div>;
-      })} */}
+      })}
     </div>
   );
 }
