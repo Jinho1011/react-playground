@@ -1,13 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import React from "react";
 import { css } from "@emotion/react";
+import { useQuery } from "react-query";
 
+import { getMovieList } from "../api/movie";
 import MovieItem from "./MovieItem";
 import { YTS } from "../interfaces/api/movie";
-
-interface iMovieList {
-  data: YTS | undefined;
-}
 
 const title__container = css`
   display: flex;
@@ -23,7 +21,11 @@ const movies__container = css`
   column-gap: 20px;
 `;
 
-function MovieList({ data }: iMovieList) {
+function MovieList() {
+  const { data } = useQuery("movieList", getMovieList, {
+    suspense: true,
+  });
+
   return (
     <div className="container">
       <div css={title__container}>
