@@ -21,7 +21,7 @@ const movies__container = css`
 `;
 
 function Movie() {
-  const { isLoading, error, data } = useQuery("repoData", getMovieList);
+  const { isLoading, error, data } = useQuery("movieList", getMovieList);
 
   return (
     <div className="container">
