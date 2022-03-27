@@ -7,7 +7,7 @@ const header = css`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  padding: 16px 0 13px 0;
+  padding-top: 16px;
   -webkit-box-shadow: 4px 4px 20px 10px rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 4px 4px 20px 10px rgba(0, 0, 0, 0.1);
   box-shadow: 4px 4px 20px 10px rgba(0, 0, 0, 0.1);
@@ -35,14 +35,14 @@ const nav__items = css`
 
 const link__item = css`
   text-decoration: none;
-  color: #525252;
-  padding-bottom: 3px;
+  color: #646464;
+  padding-bottom: 10px;
 `;
 
 const link__selected__item = css`
-  text-decoration: none;
+  ${link__item}
   color: #1a1a1a;
-  font-weight: bold;
+  padding-bottom: 7px;
   border-bottom: 3px solid #1a1a1a;
 `;
 
