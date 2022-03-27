@@ -8,7 +8,7 @@ import App from "./App";
 import TodoReducer from "./store/todo/reducer";
 
 const rootReducer = combineReducers({
-  toods: TodoReducer,
+  todos: TodoReducer,
 });
 
 const store = createStore(rootReducer);
