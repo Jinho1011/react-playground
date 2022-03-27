@@ -12,5 +12,11 @@ export default css`
     justify-content: center;
     align-items: center;
     padding-top: 100px;
+    padding-bottom: 100px;
+  }
+
+  .title {
+    font-size: 24px;
+    font-color: #232323;
   }
 `;
