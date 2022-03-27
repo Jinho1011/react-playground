@@ -1,16 +1,7 @@
 import { CREATE, CHECK, MODIFY, DELETE, Action } from "./actions";
+import { Todo, TodoState } from "../../interfaces/store/todos";
 
-interface Todo {
-  id: number;
-  todo: string;
-  check: boolean;
-}
-
-interface State {
-  data: Todo[];
-}
-
-const initialState: State = {
+const initialState: TodoState = {
   data: [],
 };
 
