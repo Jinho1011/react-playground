@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { createStore, combineReducers } from "redux";
 
+import * as ReactDOMClient from "react-dom/client";
 import App from "./App";
 import TodoReducer from "./store/todo/reducer";
 
@@ -13,11 +14,16 @@ const rootReducer = combineReducers({
 
 const store = createStore(rootReducer);
 
-ReactDOM.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </Provider>,
-  document.getElementById("root")
-);
+const container = document.getElementById("root");
+
+if (container) {
+  const root = ReactDOMClient.createRoot(container);
+
+  root.render(
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
+  );
+}
