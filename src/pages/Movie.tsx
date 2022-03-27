@@ -1,17 +1,27 @@
-/** @jsxImportSource @emotion/react */
 import React, { Suspense } from "react";
-import { css } from "@emotion/react";
-import { useQuery } from "react-query";
+import { useQuery, useQueryErrorResetBoundary } from "react-query";
+import { ErrorBoundary } from "react-error-boundary";
 
 import { getMovieList } from "../api/movie";
 import MovieList from "../components/MovieList";
 
 function Movie() {
-  const { isLoading, error, data } = useQuery("movieList", getMovieList, {
+  const { reset } = useQueryErrorResetBoundary();
+
+  const { data } = useQuery("movieList", getMovieList, {
     suspense: true,
   });
 
-  return <MovieList data={data} />;
+  return (
+    <Suspense fallback={<h1>Loading Movies...</h1>}>
+      <ErrorBoundary
+        onReset={reset}
+        fallbackRender={() => <div>There was an error!</div>}
+      >
+        <MovieList data={data} />
+      </ErrorBoundary>
+    </Suspense>
+  );
 }
 
 export default Movie;
