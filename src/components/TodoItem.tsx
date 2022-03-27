@@ -43,8 +43,8 @@ function TodoItem({ todo, checkTodo, modifyTodo, deleteTodo }: iTodoItem) {
         />
       ) : (
         <>
-          <div>
-            <span>{todo.todo}</span>
+          <div onClick={() => checkTodo(todo.id)}>
+            <span>{todo.check ? <del>{todo.todo}</del> : todo.todo}</span>
           </div>
           <div css={todo__right}>
             <div css={button} onClick={() => setIsEditing(true)}>
