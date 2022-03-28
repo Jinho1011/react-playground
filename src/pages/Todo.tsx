@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { css } from "@emotion/react";
 import { useSelector, useDispatch, shallowEqual } from "react-redux";
 
@@ -22,6 +22,23 @@ const title__container = css`
 
 const divider = css`
   border-bottom: 1px solid #cccccc;
+`;
+
+const todos__container = css`
+  display: flex;
+  width: 420px;
+  flex-direction: column;
+  background-color: #ffffff;
+  -webkit-box-shadow: 4px 4px 20px 10px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 4px 4px 20px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 4px 4px 20px 10px rgba(0, 0, 0, 0.1);
+`;
+
+const input = css`
+  outline: none;
+  border: none;
+  font-size: 18px;
+  padding: 10px;
 `;
 
 function Todo() {
@@ -51,20 +68,14 @@ function Todo() {
     <div className="container">
       <div css={title__container}>
         <span className="title">Todos</span>
-        <span>{todos.length}</span>
       </div>
-      <div
-        css={css`
-          display: flex;
-          width: 420px;
-          flex-direction: column;
-          background-color: #ffffff;
-          -webkit-box-shadow: 4px 4px 20px 10px rgba(0, 0, 0, 0.1);
-          -moz-box-shadow: 4px 4px 20px 10px rgba(0, 0, 0, 0.1);
-          box-shadow: 4px 4px 20px 10px rgba(0, 0, 0, 0.1);
-        `}
-      >
-        <Input createTodo={_createTodo} />
+      <div css={todos__container}>
+        <Input
+          onSubmit={_createTodo}
+          placeholder="Todo를 입력해주세요."
+          textAfterSubmit=""
+          style={input}
+        />
         {todos.length === 0 ? <></> : <div css={divider} />}
         {todos.map((todo) => {
           return (

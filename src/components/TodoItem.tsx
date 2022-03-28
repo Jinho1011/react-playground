@@ -3,7 +3,8 @@ import React, { useState, memo } from "react";
 import { css } from "@emotion/react";
 
 import { Todo } from "../interfaces/store/todos";
-import ModifyInput from "../components/ModifyInput";
+// import ModifyInput from "../components/ModifyInput";
+import Input from "./Input";
 
 interface iTodoItem {
   todo: Todo;
@@ -30,19 +31,29 @@ const button = css`
   cursor: pointer;
 `;
 
+const input = css`
+  width: 100%;
+  outline: none;
+  border: none;
+  font-size: 16px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #ccc;
+`;
+
 function TodoItem({ todo, checkTodo, modifyTodo, deleteTodo }: iTodoItem) {
   const [isEditing, setIsEditing] = useState<boolean>(false);
 
-  console.log(`Item ${todo.todo} render`);
+  console.log(todo);
+
+  const onSubmit = (text: string) => {
+    modifyTodo(todo.id, text);
+    setIsEditing(false);
+  };
 
   return (
     <div css={todo__container}>
       {isEditing ? (
-        <ModifyInput
-          todo={todo}
-          modifyTodo={modifyTodo}
-          setIsEditing={setIsEditing}
-        />
+        <Input onSubmit={onSubmit} placeholder={todo.todo} style={input} />
       ) : (
         <>
           <div onClick={() => checkTodo(todo.id)}>
@@ -64,5 +75,5 @@ function TodoItem({ todo, checkTodo, modifyTodo, deleteTodo }: iTodoItem) {
 
 export default memo(
   TodoItem,
-  (prevProps, nextProps) => prevProps.todo.id === nextProps.todo.id
+  (prevProps, nextProps) => prevProps.todo === nextProps.todo
 );

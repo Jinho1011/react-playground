@@ -1,19 +1,15 @@
 /** @jsxImportSource @emotion/react */
-import React, { useState, useEffect } from "react";
-import { css } from "@emotion/react";
+import React, { useState } from "react";
+import { css, SerializedStyles } from "@emotion/react";
 
 interface IInput {
-  createTodo: Function;
+  onSubmit: Function;
+  placeholder: string;
+  textAfterSubmit?: string;
+  style: SerializedStyles;
 }
 
-const input = css`
-  outline: none;
-  border: none;
-  font-size: 18px;
-  padding: 10px;
-`;
-
-function Input({ createTodo }: IInput) {
+function Input({ onSubmit, placeholder, textAfterSubmit, style }: IInput) {
   const [text, setText] = useState<string>("");
 
   const onChange = (e: any) => {
@@ -22,18 +18,18 @@ function Input({ createTodo }: IInput) {
 
   const onKeyPress = (e: any) => {
     if (e.key === "Enter") {
-      createTodo(text);
-      setText("");
+      onSubmit(text);
+      setText(textAfterSubmit === undefined ? text : textAfterSubmit);
     }
   };
 
   return (
     <input
-      css={input}
+      css={style}
       onChange={onChange}
       onKeyPress={onKeyPress}
       value={text}
-      placeholder="todo를 추가하세요"
+      placeholder={placeholder}
     />
   );
 }
