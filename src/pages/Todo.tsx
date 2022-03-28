@@ -51,6 +51,7 @@ function Todo() {
     <div className="container">
       <div css={title__container}>
         <span className="title">Todos</span>
+        <span>{todos.length}</span>
       </div>
       <div
         css={css`
@@ -65,17 +66,15 @@ function Todo() {
       >
         <Input createTodo={_createTodo} />
         {todos.length === 0 ? <></> : <div css={divider} />}
-        {todos.map((todo, index) => {
+        {todos.map((todo) => {
           return (
-            <div key={todo.id}>
-              <TodoItem
-                todo={todo}
-                checkTodo={_checkTodo}
-                modifyTodo={_modiftTodo}
-                deleteTodo={_deleteTodo}
-              />
-              {index === todos.length - 1 ? <></> : <div css={divider} />}
-            </div>
+            <TodoItem
+              key={todo.id}
+              todo={todo}
+              checkTodo={_checkTodo}
+              modifyTodo={_modiftTodo}
+              deleteTodo={_deleteTodo}
+            />
           );
         })}
       </div>

@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React, { useState, useEffect } from "react";
+import React, { useState, memo } from "react";
 import { css } from "@emotion/react";
 
 import { Todo } from "../interfaces/store/todos";
@@ -33,6 +33,8 @@ const button = css`
 function TodoItem({ todo, checkTodo, modifyTodo, deleteTodo }: iTodoItem) {
   const [isEditing, setIsEditing] = useState<boolean>(false);
 
+  console.log(`Item ${todo.todo} render`);
+
   return (
     <div css={todo__container}>
       {isEditing ? (
@@ -60,4 +62,7 @@ function TodoItem({ todo, checkTodo, modifyTodo, deleteTodo }: iTodoItem) {
   );
 }
 
-export default TodoItem;
+export default memo(
+  TodoItem,
+  (prevProps, nextProps) => prevProps.todo.id === nextProps.todo.id
+);
