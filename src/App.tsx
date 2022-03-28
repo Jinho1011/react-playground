@@ -7,6 +7,7 @@ import Header from "./components/Header";
 import Home from "./pages/Home";
 import Todo from "./pages/Todo";
 import Movie from "./pages/Movie";
+import Detail from "./pages/Detail";
 import style from "./styles";
 
 const queryClient = new QueryClient();
@@ -18,8 +19,9 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/Todo" element={<Todo />} />
-        <Route path="/Movie" element={<Movie />} />
+        <Route path="/todo" element={<Todo />} />
+        <Route path="/movie" element={<Movie />} />
+        <Route path="/movie/:id" element={<Detail />} />
       </Routes>
     </QueryClientProvider>
   );
