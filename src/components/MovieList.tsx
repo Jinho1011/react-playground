@@ -24,6 +24,7 @@ function MovieList() {
   const [page, setPage] = useState<number>(1);
   const { data } = useQuery(["movieList", page], () => getMovieList(page), {
     suspense: true,
+    keepPreviousData: true,
   });
 
   return (
