@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React from "react";
+import React, { useState } from "react";
 import { css } from "@emotion/react";
 import { useQuery } from "react-query";
 
@@ -21,7 +21,8 @@ const movies__container = css`
 `;
 
 function MovieList() {
-  const { data } = useQuery("movieList", getMovieList, {
+  const [page, setPage] = useState<number>(1);
+  const { data } = useQuery(["movieList", page], () => getMovieList(page), {
     suspense: true,
   });
 
@@ -34,6 +35,22 @@ function MovieList() {
         {data?.data.movies.map((movie) => {
           return <MovieItem key={movie.id} movie={movie} />;
         })}
+      </div>
+      <div>
+        <button
+          onClick={() => setPage((old) => Math.max(old - 1, 1))}
+          disabled={page === 1}
+        >
+          Previous Page
+        </button>
+        <span>Current Page: {page}</span>
+        <button
+          onClick={() => {
+            setPage((old) => old + 1);
+          }}
+        >
+          Next Page
+        </button>
       </div>
     </div>
   );
