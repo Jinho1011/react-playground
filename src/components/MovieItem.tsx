@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { css } from "@emotion/react";
 
 import { Movie } from "../interfaces/api/movie";
@@ -34,8 +35,9 @@ const movie__info = css`
 `;
 
 function MovieItem({ movie }: iMovieItem) {
+  let navigate = useNavigate();
   return (
-    <div css={movie__container}>
+    <div css={movie__container} onClick={() => navigate(`/movie/${movie.id}`)}>
       <img
         css={movie__image}
         src={movie.medium_cover_image}
